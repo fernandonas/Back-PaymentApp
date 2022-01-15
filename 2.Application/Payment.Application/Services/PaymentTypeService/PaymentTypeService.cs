@@ -24,19 +24,23 @@ namespace Application.Services.PaymentTypeService
             await _paymentTypeRepository.Create(paymentType);
         }
 
-        public IList<PaymentTypeResponse> GetAll()
+        public IList<PaymentTypeResponseModel> GetAll()
         {
             var response = _paymentTypeRepository
                 .GetAll()
-                .Where(x => x.Active == true)
+                .Where(x => x.Active)
                 .ToList();
 
-            return response.Select(d => new PaymentTypeResponse
+            var test = response.Select(d => new PaymentTypeResponseModel
             {
                 Name = d.Name,
                 Id = d.Id,
-                Active = d.Active
+                Active = d.Active,
+                CreatedAt = d.CreatedAt,
+                UpdatedAt = d.UpdatedAt
             }).ToList();
+
+            return test;
         }
 
         public async Task Delete(Guid id)

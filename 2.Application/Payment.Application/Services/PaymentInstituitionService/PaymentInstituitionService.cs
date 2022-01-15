@@ -43,7 +43,9 @@ namespace Payment.Application.Services.PaymentInstituitionService
             {
                 Name = d.Name,
                 Id = d.Id,
-                Active = d.Active
+                Active = d.Active,
+                CreatedAt = d.CreatedAt,
+                UpdatedAt = d.UpdatedAt
             }).ToList();
         }
 

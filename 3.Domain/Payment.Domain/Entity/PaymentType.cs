@@ -11,6 +11,7 @@ namespace Payment.Domain.Entity
         public PaymentType(string name)
         {
             Name = name;
+            CreatedAt = DateTime.Now;
             Validate();
         }
 
@@ -18,8 +19,7 @@ namespace Payment.Domain.Entity
         {
             Name = name;
             Id = id;
-
-
+            UpdatedAt = DateTime.Now;
             Validate();
         }
 

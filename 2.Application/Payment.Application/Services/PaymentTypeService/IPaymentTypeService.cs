@@ -8,7 +8,7 @@ namespace Application.Services.PaymentTypeService
     public interface IPaymentTypeService
     {
         Task Add(PaymentTypeRequest request);
-        IList<PaymentTypeResponse> GetAll();
+        IList<PaymentTypeResponseModel> GetAll();
         Task Delete(Guid id);
         Task Update(Guid id, PaymentTypeRequest request);
     }

@@ -28,7 +28,7 @@ namespace Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public IList<PaymentTypeResponse> GetAll()
+        public IList<PaymentTypeResponseModel> GetAll()
         {
             return _paymentTypeService.GetAll();
         }
