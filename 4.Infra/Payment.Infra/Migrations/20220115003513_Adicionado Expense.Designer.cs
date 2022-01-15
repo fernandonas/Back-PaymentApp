@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Payment.Infra.Context;
@@ -9,9 +10,10 @@ using Payment.Infra.Context;
 namespace Payment.Infra.Migrations
 {
     [DbContext(typeof(MainContext))]
-    partial class MainContextModelSnapshot : ModelSnapshot
+    [Migration("20220115003513_Adicionado Expense")]
+    partial class AdicionadoExpense
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,10 +58,6 @@ namespace Payment.Infra.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PaymentInstituitionId");
-
-                    b.HasIndex("PaymentTypeId");
 
                     b.ToTable("Expense");
                 });
@@ -108,25 +106,6 @@ namespace Payment.Infra.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PaymentType");
-                });
-
-            modelBuilder.Entity("Payment.Domain.Entity.Expense", b =>
-                {
-                    b.HasOne("Payment.Domain.Entity.PaymentInstituition", "PaymentInstituition")
-                        .WithMany()
-                        .HasForeignKey("PaymentInstituitionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Payment.Domain.Entity.PaymentType", "PaymentType")
-                        .WithMany()
-                        .HasForeignKey("PaymentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PaymentInstituition");
-
-                    b.Navigation("PaymentType");
                 });
 #pragma warning restore 612, 618
         }

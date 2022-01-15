@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 
 namespace Payment.Domain.Interfaces
 {
-    public interface IPaymentInstituitionRepository : IGenericRepository<PaymentInstituition>
+    public interface IExpenseRepository: IGenericRepository<Expense>
     {
+        Task<IList<Expense>> GetExpenseListWithEspenseTypeAndPaymentType();
     }
 }

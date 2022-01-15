@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Payment.Application.Services.ExpenseService;
 using Payment.Application.Services.PaymentInstituitionService;
 using Payment.Domain.Interfaces;
 using Payment.Infra.Context;
 using Payment.Infra.Filter;
+using Payment.Infra.Repositories.ExpenseRepository;
 using Payment.Infra.Repositories.PaymentInstituitionRepository;
 using Payment.Infra.Repositories.PaymentTypeRepository;
 
@@ -38,6 +40,8 @@ namespace Payment.Web
             services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
             services.AddScoped<PaymentInstituitionService, PaymentInstituitionService>();
             services.AddScoped<IPaymentInstituitionRepository, PaymentInstituitionRepository>();
+            services.AddScoped<ExpenseService, ExpenseService>();
+            services.AddScoped<IExpenseRepository, ExpenseRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
