@@ -25,7 +25,7 @@ namespace Payment.Web.Controllers
         public async Task<IActionResult> Create([FromBody] ExpenseRequestModel request)
         {
             await _expenseService.Add(request);
-            return NoContent();
+            return StatusCode(200);
         }
 
         [HttpGet]

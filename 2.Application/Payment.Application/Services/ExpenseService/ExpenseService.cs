@@ -22,7 +22,6 @@ namespace Payment.Application.Services.ExpenseService
 
         public async Task Add(ExpenseRequestModel request)
         {
-
             var expense = new Expense(
                     request.Name,
                     request.PurchaseDate,
@@ -30,7 +29,9 @@ namespace Payment.Application.Services.ExpenseService
                     request.ExpenseType,
                     request.PaymentInstituitionId,
                     request.PaymentTypeId,
-                    request.PaymentStatus
+                    request.PaymentStatus,
+                    request.PaymentDate,
+                    request.DueDate
                 );
 
             await _expenseRepository.Create(expense);
@@ -50,22 +51,24 @@ namespace Payment.Application.Services.ExpenseService
                 PaymentInstituitionId = d.PaymentInstituitionId,
                 PaymentTypeId = d.PaymentTypeId,
                 PaymentStatus = d.PaymentStatus,
-                PaymentInstituition = new PaymentInstituitionResponse()
+                PaymentDate = d.PaymentDate,
+                DueDate = d.DueDate,
+                PaymentInstituition = d.PaymentInstituitionId != null ? new PaymentInstituitionResponse()
                 {
                     Id = d.PaymentInstituition.Id,
                      Active = d.PaymentInstituition.Active,
                      CreatedAt = d.PaymentInstituition.CreatedAt,
                      Name = d.PaymentInstituition.Name,
                      UpdatedAt = d.PaymentInstituition.UpdatedAt
-                },
-                PaymentType = new PaymentTypeResponseModel()
+                }: null,
+                PaymentType = d.PaymentTypeId != null ? new PaymentTypeResponseModel()
                 {
                     UpdatedAt = d.PaymentType.UpdatedAt,
                     Name = d.PaymentType.Name,
                     CreatedAt = d.PaymentType.CreatedAt,
                     Active = d.PaymentType.Active,
                     Id = d.PaymentType.Id
-                },
+                }: null,
                 Id = d.Id,
                 Active = d.Active,
                 CreatedAt = d.CreatedAt,

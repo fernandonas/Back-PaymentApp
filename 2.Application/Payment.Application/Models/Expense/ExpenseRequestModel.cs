@@ -9,8 +9,10 @@ namespace Payment.Application.Models.Expense
         public DateTime PurchaseDate { get; set; }
         public decimal Amount { get; set; }
         public ExpenseType ExpenseType { get; set; }
-        public Guid PaymentInstituitionId { get; set; }
-        public Guid PaymentTypeId { get; set; }
+        public Guid? PaymentInstituitionId { get; set; }
+        public Guid? PaymentTypeId { get; set; }
+        public DateTime? PaymentDate { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
+        public DateTime? DueDate { get; set; }
     }
 }

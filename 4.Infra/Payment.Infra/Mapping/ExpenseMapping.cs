@@ -13,6 +13,8 @@ namespace Payment.Infra.Mapping
             builder.Property(x => x.ExpenseType);
             builder.Property(x => x.PaymentStatus);
             builder.Property(x => x.PaymentInstituitionId);
+            builder.Property(x => x.PaymentDate);
+            builder.Property(x => x.DueDate);
             builder.HasOne(x => x.PaymentType)
                 .WithMany()
                 .HasForeignKey(x => x.PaymentTypeId);
