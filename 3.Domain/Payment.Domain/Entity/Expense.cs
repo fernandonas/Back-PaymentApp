@@ -7,7 +7,7 @@ namespace Payment.Domain.Entity
     {
         protected Expense() { }
 
-        public Expense(string name, DateTime purchaseDate, decimal amount, ExpenseType expenseType, Guid? paymentInstituitionId, Guid? paymentTypeId, PaymentStatus paymentStatus, DateTime? paymentDate, DateTime? dueDate)
+        public Expense(string name, DateTime purchaseDate, decimal amount, ExpenseType expenseType, Guid? paymentInstituitionId, Guid? paymentTypeId, PaymentStatus paymentStatus, DateTime? paymentDate, DateTime? dueDate, string? invoice)
         {
             Name = name;
             PurchaseDate = purchaseDate;
@@ -19,6 +19,7 @@ namespace Payment.Domain.Entity
             PaymentDate = paymentDate;
             DueDate = dueDate;
             CreatedAt = DateTime.Now;
+            Invoice = invoice;
         }
 
         public string Name { get; set; }
@@ -30,6 +31,7 @@ namespace Payment.Domain.Entity
         public PaymentStatus PaymentStatus { get; set; }
         public DateTime? PaymentDate { get; set; }
         public DateTime? DueDate { get; set; }
+        public string? Invoice { get; set; }
         public virtual PaymentInstituition? PaymentInstituition { get; protected set; }
         public virtual PaymentType? PaymentType { get; protected set; }
     }

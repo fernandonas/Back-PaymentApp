@@ -13,7 +13,7 @@ namespace Payment.Web.Controllers
     [ApiController]
     public class ExpenseController : ControllerBase
     {
-        private readonly ExpenseService _expenseService;
+        private readonly IExpenseService _expenseService;
 
         public ExpenseController(ExpenseService expenseService)
         {
@@ -40,6 +40,13 @@ namespace Payment.Web.Controllers
         public async Task Detele([FromQuery] Guid id)
         {
             await _expenseService.Delete(id);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ExpenseResponseModel> GetById([FromRoute] Guid id)
+        {
+            return await _expenseService.GetById(id);
         }
 
 

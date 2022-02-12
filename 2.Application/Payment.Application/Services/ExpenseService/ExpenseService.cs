@@ -6,12 +6,11 @@ using Payment.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Payment.Application.Services.ExpenseService
 {
-    public class ExpenseService
+    public class ExpenseService : IExpenseService
     {
         private readonly IExpenseRepository _expenseRepository;
 
@@ -31,7 +30,8 @@ namespace Payment.Application.Services.ExpenseService
                     request.PaymentTypeId,
                     request.PaymentStatus,
                     request.PaymentDate,
-                    request.DueDate
+                    request.DueDate,
+                    request.Invoice
                 );
 
             await _expenseRepository.Create(expense);
@@ -56,11 +56,11 @@ namespace Payment.Application.Services.ExpenseService
                 PaymentInstituition = d.PaymentInstituitionId != null ? new PaymentInstituitionResponse()
                 {
                     Id = d.PaymentInstituition.Id,
-                     Active = d.PaymentInstituition.Active,
-                     CreatedAt = d.PaymentInstituition.CreatedAt,
-                     Name = d.PaymentInstituition.Name,
-                     UpdatedAt = d.PaymentInstituition.UpdatedAt
-                }: null,
+                    Active = d.PaymentInstituition.Active,
+                    CreatedAt = d.PaymentInstituition.CreatedAt,
+                    Name = d.PaymentInstituition.Name,
+                    UpdatedAt = d.PaymentInstituition.UpdatedAt
+                } : null,
                 PaymentType = d.PaymentTypeId != null ? new PaymentTypeResponseModel()
                 {
                     UpdatedAt = d.PaymentType.UpdatedAt,
@@ -68,13 +68,63 @@ namespace Payment.Application.Services.ExpenseService
                     CreatedAt = d.PaymentType.CreatedAt,
                     Active = d.PaymentType.Active,
                     Id = d.PaymentType.Id
-                }: null,
+                } : null,
                 Id = d.Id,
                 Active = d.Active,
                 CreatedAt = d.CreatedAt,
                 UpdatedAt = d.UpdatedAt
             }).ToList();
         }
+
+        public async Task<ExpenseResponseModel> GetById(Guid id)
+        {
+            var expense = await _expenseRepository.GetExpenseWithEspenseTypeAndPaymentType(id);
+
+            if (expense == null)
+            {
+                throw new Exception("Despesa não encontrada!");
+
+            }
+
+            var response = new ExpenseResponseModel
+            {
+                Name = expense.Name,
+                PurchaseDate = expense.PurchaseDate,
+                Amount = expense.Amount,
+                ExpenseType = expense.ExpenseType,
+                PaymentInstituitionId = expense.PaymentInstituitionId,
+                PaymentTypeId = expense.PaymentTypeId,
+                PaymentStatus = expense.PaymentStatus,
+                PaymentDate = expense.PaymentDate,
+                DueDate = expense.DueDate,
+                PaymentInstituition = expense.PaymentInstituitionId != null ? new PaymentInstituitionResponse()
+                {
+                    Id = expense.PaymentInstituition.Id,
+                    Active = expense.PaymentInstituition.Active,
+                    CreatedAt = expense.PaymentInstituition.CreatedAt,
+                    Name = expense.PaymentInstituition.Name,
+                    UpdatedAt = expense.PaymentInstituition.UpdatedAt
+                } : null,
+                PaymentType = expense.PaymentTypeId != null ? new PaymentTypeResponseModel()
+                {
+                    UpdatedAt = expense.PaymentType.UpdatedAt,
+                    Name = expense.PaymentType.Name,
+                    CreatedAt = expense.PaymentType.CreatedAt,
+                    Active = expense.PaymentType.Active,
+                    Id = expense.PaymentType.Id
+                } : null,
+                Id = expense.Id,
+                Active = expense.Active,
+                CreatedAt = expense.CreatedAt,
+                UpdatedAt = expense.UpdatedAt,
+                Invoice = expense.Invoice
+            };
+
+
+            return response;
+        }
+
+
 
         public async Task Delete(Guid id)
         {

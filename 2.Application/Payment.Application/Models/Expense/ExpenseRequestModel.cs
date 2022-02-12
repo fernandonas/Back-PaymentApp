@@ -14,5 +14,6 @@ namespace Payment.Application.Models.Expense
         public DateTime? PaymentDate { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public DateTime? DueDate { get; set; }
+        public string? Invoice { get; set; }
     }
 }
