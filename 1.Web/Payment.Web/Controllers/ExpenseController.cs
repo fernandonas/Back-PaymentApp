@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Payment.Application.Models.Expense;
-using Payment.Application.Models.PaymentInstituition;
 using Payment.Application.Services.ExpenseService;
-using Payment.Application.Services.PaymentInstituitionService;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,7 +13,7 @@ namespace Payment.Web.Controllers
     {
         private readonly IExpenseService _expenseService;
 
-        public ExpenseController(ExpenseService expenseService)
+        public ExpenseController(IExpenseService expenseService)
         {
             _expenseService = expenseService;
         }

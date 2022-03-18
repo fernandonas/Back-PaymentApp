@@ -49,7 +49,7 @@ namespace Application.Services.PaymentTypeService
 
             if (response != null)
             {
-               await _paymentTypeRepository.Delete(id);
+                await _paymentTypeRepository.Delete(id);
             }
         }
 

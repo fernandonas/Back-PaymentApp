@@ -32,15 +32,14 @@ namespace Payment.Web
             services.AddMvc(options =>
                options.Filters.Add(typeof(JsonExceptionFilter))
            ).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddRazorPages();
             services.AddDbContext<MainContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("MyWebApiConection")));
             services.AddScoped<IPaymentTypeService, PaymentTypeService>();
             services.AddScoped<IPaymentTypeRepository, PaymentTypeRepository>();
-            services.AddScoped<PaymentInstituitionService, PaymentInstituitionService>();
+            services.AddScoped<IPaymentInstituitionService, PaymentInstituitionService>();
             services.AddScoped<IPaymentInstituitionRepository, PaymentInstituitionRepository>();
-            services.AddScoped<ExpenseService, ExpenseService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
         }
 

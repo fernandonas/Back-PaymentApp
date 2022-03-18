@@ -13,7 +13,7 @@ namespace Payment.Web.Controllers
     {
         private readonly IPaymentInstituitionService _paymentIstituitionService;
 
-        public PaymentInstituitionController(PaymentInstituitionService paymentInstituitionService)
+        public PaymentInstituitionController(IPaymentInstituitionService paymentInstituitionService)
         {
             _paymentIstituitionService = paymentInstituitionService;
         }
