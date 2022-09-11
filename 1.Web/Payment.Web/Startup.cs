@@ -42,6 +42,7 @@ namespace Payment.Web
             services.AddScoped<IPaymentInstituitionRepository, PaymentInstituitionRepository>();
             services.AddScoped<ExpenseService, ExpenseService>();
             services.AddScoped<IExpenseRepository, ExpenseRepository>();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,16 +59,25 @@ namespace Payment.Web
                 app.UseHsts();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentAPP V1");
+                c.RoutePrefix = "swagger";
+            });
             app.UseCors(option => option.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+            });           
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
             });
         }
     }
