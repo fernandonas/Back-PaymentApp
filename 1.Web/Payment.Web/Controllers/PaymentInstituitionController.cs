@@ -20,7 +20,7 @@ namespace Payment.Web.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> Create([FromBody] PaymentInstituitionRequest request)
+        public async Task<IActionResult> Create([FromBody] PaymentInstituitionRequestModel request)
         {
             await _paymentIstituitionService.Add(request);
             return NoContent();
@@ -35,14 +35,14 @@ namespace Payment.Web.Controllers
 
         [HttpGet]
         [Route("")]
-        public IList<PaymentInstituitionResponse> GetAll()
+        public IList<PaymentInstituitionResponseModel> GetAll()
         {
             return _paymentIstituitionService.GetAll();
         }
 
         [HttpPut]
         [Route("{id}")]
-        public Task Update(Guid id, [FromBody] PaymentInstituitionRequest request)
+        public Task Update(Guid id, [FromBody] PaymentInstituitionRequestModel request)
         {
             return _paymentIstituitionService.Update(id, request);
         }

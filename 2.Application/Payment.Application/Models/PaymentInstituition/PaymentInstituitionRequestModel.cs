@@ -1,6 +1,6 @@
 ﻿namespace Payment.Application.Models.PaymentInstituition
 {
-    public class PaymentInstituitionRequest : ModelBase
+    public class PaymentInstituitionRequestModel : ModelBase
     {
         public string Name { get; set; }
     }

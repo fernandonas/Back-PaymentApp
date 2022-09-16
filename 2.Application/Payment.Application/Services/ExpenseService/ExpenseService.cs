@@ -53,7 +53,7 @@ namespace Payment.Application.Services.ExpenseService
                 PaymentStatus = d.PaymentStatus,
                 PaymentDate = d.PaymentDate,
                 DueDate = d.DueDate,
-                PaymentInstituition = d.PaymentInstituitionId != null ? new PaymentInstituitionResponse()
+                PaymentInstituition = d.PaymentInstituitionId != null ? new PaymentInstituitionResponseModel()
                 {
                     Id = d.PaymentInstituition.Id,
                     Active = d.PaymentInstituition.Active,
@@ -96,7 +96,7 @@ namespace Payment.Application.Services.ExpenseService
                 PaymentStatus = expense.PaymentStatus,
                 PaymentDate = expense.PaymentDate,
                 DueDate = expense.DueDate,
-                PaymentInstituition = expense.PaymentInstituitionId != null ? new PaymentInstituitionResponse()
+                PaymentInstituition = expense.PaymentInstituitionId != null ? new PaymentInstituitionResponseModel()
                 {
                     Id = expense.PaymentInstituition.Id,
                     Active = expense.PaymentInstituition.Active,

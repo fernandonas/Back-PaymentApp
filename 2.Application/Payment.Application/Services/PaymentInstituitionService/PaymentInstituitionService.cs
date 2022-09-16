@@ -18,7 +18,7 @@ namespace Payment.Application.Services.PaymentInstituitionService
             _paymentInstituitionRepository = paymentInstituitionRepository;
         }
 
-        public async Task Add(PaymentInstituitionRequest request)
+        public async Task Add(PaymentInstituitionRequestModel request)
         {
             IsPaymentInstituitionlreadyRegistered(request.Name);
 
@@ -32,14 +32,14 @@ namespace Payment.Application.Services.PaymentInstituitionService
             await _paymentInstituitionRepository.Delete(id);
         }
 
-        public IList<PaymentInstituitionResponse> GetAll()
+        public IList<PaymentInstituitionResponseModel> GetAll()
         {
             var response = _paymentInstituitionRepository
                 .GetAll()
                 .Where(x => x.Active)
                 .ToList();
 
-            return response.Select(d => new PaymentInstituitionResponse
+            return response.Select(d => new PaymentInstituitionResponseModel
             {
                 Name = d.Name,
                 Id = d.Id,
@@ -49,7 +49,7 @@ namespace Payment.Application.Services.PaymentInstituitionService
             }).ToList();
         }
 
-        public async Task Update(Guid id, PaymentInstituitionRequest request)
+        public async Task Update(Guid id, PaymentInstituitionRequestModel request)
         {
             IsPaymentInstituitionlreadyRegistered(request.Name);
 
