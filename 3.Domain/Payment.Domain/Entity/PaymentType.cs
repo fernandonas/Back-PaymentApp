@@ -6,7 +6,7 @@ namespace Payment.Domain.Entity
 {
     public class PaymentType : BaseEntity
     {
-        protected PaymentType() {}
+        protected PaymentType() { }
 
         public PaymentType(string name)
         {
