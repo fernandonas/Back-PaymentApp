@@ -73,7 +73,7 @@ namespace Payment.Application.Services.ExpenseService
                 Active = d.Active,
                 CreatedAt = d.CreatedAt,
                 UpdatedAt = d.UpdatedAt
-            }).ToList();
+            }).OrderBy(x => x.DueDate).ToList();
         }
 
         public async Task<ExpenseResponseModel> GetById(Guid id)
@@ -83,7 +83,6 @@ namespace Payment.Application.Services.ExpenseService
             if (expense == null)
             {
                 throw new Exception("Despesa não encontrada!");
-
             }
 
             var response = new ExpenseResponseModel
@@ -120,7 +119,6 @@ namespace Payment.Application.Services.ExpenseService
                 Invoice = expense.Invoice
             };
 
-
             return response;
         }
 
@@ -130,6 +128,5 @@ namespace Payment.Application.Services.ExpenseService
         {
             await _expenseRepository.Delete(id);
         }
-
     }
 }
