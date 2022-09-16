@@ -7,9 +7,9 @@ namespace Payment.Application.Services.PaymentInstituitionService
 {
     public interface IPaymentInstituitionService
     {
-        Task Add(PaymentInstituitionRequest request);
-        IList<PaymentInstituitionResponse> GetAll();
+        Task Add(PaymentInstituitionRequestModel request);
+        IList<PaymentInstituitionResponseModel> GetAll();
         Task Delete(Guid id);
-        Task Update(Guid id, PaymentInstituitionRequest request);
+        Task Update(Guid id, PaymentInstituitionRequestModel request);
     }
 }
